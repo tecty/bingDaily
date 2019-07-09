@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import requests
+import json 
 
 # https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=10
 r = requests.get("https://cn.bing.com/HPImageArchive.aspx", params={
@@ -10,11 +11,15 @@ r = requests.get("https://cn.bing.com/HPImageArchive.aspx", params={
 })
 # this is the images array (array<dict>)
 images = r.json()['images']
+# print(images)
+# store the parsed data 
+new_images = []
+for img in images:
+    new_img = {
+        "url":"http://www.bing.com/hpwp/"+ img['hsh'],
+        "copyright": img['copyright']
+    }
+    new_images.append(new_img)
 
-# this is the string of hash of images 
-images = [img['hsh'] for img in images]
 
-# i need to prepend the url 
-images = ["http://www.bing.com/hpwp/"+img for img in images]
-
-[print(img) for img in images]
+[print(json.dumps(img)) for img in new_images]
