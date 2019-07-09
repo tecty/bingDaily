@@ -22,6 +22,7 @@ template = """
         body,html {
             height: 100%%;
             width: 100%%;
+            margin:unset;
         }
         #copyright {
             color: white;
@@ -30,6 +31,7 @@ template = """
             position: absolute;
             bottom: 0;
             right: 0;
+            margin:unset;
         }
         </style>
         <title>%s</title>
